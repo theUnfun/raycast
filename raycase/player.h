@@ -1,9 +1,6 @@
 #pragma once
-
-
 #include <SFML/Graphics.hpp>
 #include <vector>
-
 
 
 namespace map {
@@ -11,9 +8,9 @@ namespace map {
 }
 
 
-class Player {
+class Player
+{
 public:
-
 	Player(int x, int y, const map::Map& map);
 
 	void Update(float deltatime);
@@ -22,8 +19,7 @@ public:
 
 
 private:
-
-	double GetDistanceBetweenObjects(const sf::Vector2f& position1, const sf::Vector2f& position2);
+	float GetDistanceBetweenObjects(const sf::Vector2f& position1, const sf::Vector2f& position2);
 
 	void DrawPlayer(sf::RenderWindow& window_2d) const;
 
@@ -38,8 +34,8 @@ private:
 private:
 	sf::Vector2f position_;
 
-	float direction_ = 40.; //angle
-	std::vector<double> distances_;
+	float direction_ = 40.;  // angle
+	std::vector<float> distances_;
 
 	std::vector<sf::VertexArray> rays_;
 	std::vector<sf::Vector2f> collis;

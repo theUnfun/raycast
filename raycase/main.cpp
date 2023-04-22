@@ -7,7 +7,8 @@
 int main()
 {
 	sf::RenderWindow window_2d(sf::VideoMode(700, 700), "2d");
-	sf::RenderWindow window_3d(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "3d");
+  sf::RenderWindow window_3d(
+            sf::VideoMode((int32_t)WINDOW_WIDTH, (int32_t)WINDOW_HEIGHT), "3d");
 	window_2d.setFramerateLimit(60);
 	sf::Clock clock;
 
