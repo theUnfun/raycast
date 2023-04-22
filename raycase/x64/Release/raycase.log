@@ -1,0 +1,260 @@
+﻿  main.cpp
+D:\Projects\raycase\raycase\constants.h(7,34): warning C4305: 'initializing': truncation from 'double' to 'const float'
+D:\Projects\raycase\raycase\map.h(13,72): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\map.h(13,51): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\map.h(19,70): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\map.h(19,49): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(16,18): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(16,15): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(17,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(19,16): warning C4244: 'argument': conversion from 'const float' to 'const unsigned __int64', possible loss of data
+D:\Projects\raycase\raycase\player.h(20,21): warning C4244: 'argument': conversion from 'const float' to 'const unsigned __int64', possible loss of data
+D:\Projects\raycase\raycase\player.h(40,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(42,108): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+D:\Projects\raycase\raycase\player.h(42,72): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+D:\Projects\raycase\raycase\player.h(42,36): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+D:\Projects\raycase\raycase\player.h(83,53): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(117,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(124,17): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(123,47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(130,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(131,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(160,29): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(161,29): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(164,30): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(165,30): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\main.cpp(8,57): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+D:\Projects\raycase\raycase\main.cpp(8,43): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+  input_handler.cpp
+  player.h
+D:\Projects\raycase\raycase\constants.h(7,34): warning C4305: 'initializing': truncation from 'double' to 'const float'
+D:\Projects\raycase\raycase\map.h(13,72): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\map.h(13,51): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\map.h(19,70): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\map.h(19,49): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(16,18): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(16,15): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(17,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(19,16): warning C4244: 'argument': conversion from 'const float' to 'const unsigned __int64', possible loss of data
+D:\Projects\raycase\raycase\player.h(20,21): warning C4244: 'argument': conversion from 'const float' to 'const unsigned __int64', possible loss of data
+D:\Projects\raycase\raycase\player.h(40,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(42,108): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+D:\Projects\raycase\raycase\player.h(42,72): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+D:\Projects\raycase\raycase\player.h(42,36): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+D:\Projects\raycase\raycase\player.h(83,53): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(117,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(124,17): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(123,47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(130,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(131,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(160,29): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(161,29): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(164,30): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(165,30): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  map.h
+D:\Projects\raycase\raycase\map.h(13,72): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\map.h(13,51): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\map.h(19,70): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\map.h(19,49): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  game.h
+D:\Projects\raycase\raycase\map.h(13,72): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\map.h(13,51): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\map.h(19,70): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\map.h(19,49): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\constants.h(7,34): warning C4305: 'initializing': truncation from 'double' to 'const float'
+D:\Projects\raycase\raycase\player.h(16,18): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(16,15): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(17,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(19,16): warning C4244: 'argument': conversion from 'const float' to 'const unsigned __int64', possible loss of data
+D:\Projects\raycase\raycase\player.h(20,21): warning C4244: 'argument': conversion from 'const float' to 'const unsigned __int64', possible loss of data
+D:\Projects\raycase\raycase\player.h(40,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(42,108): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+D:\Projects\raycase\raycase\player.h(42,72): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+D:\Projects\raycase\raycase\player.h(42,36): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+D:\Projects\raycase\raycase\player.h(83,53): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(117,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(124,17): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(123,47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(130,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(131,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\raycase\raycase\player.h(160,29): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(161,29): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(164,30): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Projects\raycase\raycase\player.h(165,30): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 344 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  raycase.vcxproj -> D:\Projects\raycase\x64\Release\raycast.exe
