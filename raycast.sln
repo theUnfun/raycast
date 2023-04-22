@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "raycase", "raycase\raycase.vcxproj", "{38229DB4-7E9A-41DE-9690-61F6CA74294A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "raycast", "raycast\raycast.vcxproj", "{38229DB4-7E9A-41DE-9690-61F6CA74294A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -9,11 +9,11 @@ constexpr float MOVEMENT_SPEED = 200.;
 constexpr float ROTATION_SPEED = 100.;
 constexpr float VISION_RANGE = 500.;
 
-constexpr uint32_t FOV_HORIZONTAL = 80;
-constexpr uint32_t FOV_VERTICAL = 60;
+constexpr float FOV_HORIZONTAL = 80.0f;
+constexpr float FOV_VERTICAL = 60.0f;
 
 constexpr float WALL_HEIGHT = 100.0f;
-constexpr uint32_t NUMBER_OF_RAYS = FOV_HORIZONTAL * 2;
+constexpr uint32_t NUMBER_OF_RAYS = WINDOW_WIDTH / 8;
 
 constexpr float EPSILON = 1e-4f;
 // constexpr float NUMBER_OF_RAYS = 8;

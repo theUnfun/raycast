@@ -7,12 +7,11 @@
 int main()
 {
 	sf::RenderWindow window_2d(sf::VideoMode(700, 700), "2d");
-  sf::RenderWindow window_3d(
-            sf::VideoMode((int32_t)WINDOW_WIDTH, (int32_t)WINDOW_HEIGHT), "3d");
+	sf::RenderWindow window_3d(sf::VideoMode((int32_t)WINDOW_WIDTH, (int32_t)WINDOW_HEIGHT), "3d");
 	window_2d.setFramerateLimit(60);
 	sf::Clock clock;
 
-	map::Map m;
+	Map m;
 	Player p(50, 600, m);
 	float deltaTime = 0.f;
 
@@ -31,8 +30,8 @@ int main()
 
 		window_2d.clear();
 		window_3d.clear();
-		//m.Draw2d(window_2d);
-		p.Draw(window_2d,window_3d);
+		// m.Draw2d(window_2d);
+		p.Draw(window_2d, window_3d);
 
 		window_2d.display();
 		window_3d.display();

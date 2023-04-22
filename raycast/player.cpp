@@ -5,7 +5,7 @@
 #include <cmath>
 
 
-Player::Player(int x, int y, const map::Map& map)
+Player::Player(int x, int y, const Map& map)
     : position_((float)x, (float)y)
     , projection_distance_(0.5f * (float)WALL_HEIGHT / std::tan(pi / 180.0f * (0.5f * FOV_VERTICAL)))
     , map_(map)
@@ -14,11 +14,13 @@ Player::Player(int x, int y, const map::Map& map)
 	distances_.resize(NUMBER_OF_RAYS);
 }
 
+
 void Player::Update(float deltatime)
 {
 	MovePlayer(deltatime);
 	ComputeDistances();
 }
+
 
 void Player::Draw(sf::RenderWindow& window_2d, sf::RenderWindow& window_3d)
 {
@@ -53,7 +55,7 @@ void Player::Draw(sf::RenderWindow& window_2d, sf::RenderWindow& window_3d)
 			window_3d.draw(rect);
 		}
 
-		i += WINDOW_WIDTH / NUMBER_OF_RAYS;
+		i += (float)WINDOW_WIDTH / (float)NUMBER_OF_RAYS;
 	}
 
 	for (const auto& ray : rays_)
@@ -129,7 +131,7 @@ void Player::ComputeDistances()
 		ray[1].position = sf::Vector2f(position_.x - max_ray_length * std::cos(pi / 180.0f * (angle + direction_ + 90.0f)),
 		                               position_.y - max_ray_length * std::sin(pi / 180.0f * (angle + direction_ + 90.0f)));
 
-		map::Line ray_line{ray[0].position, ray[1].position};
+		Line ray_line{ray[0].position, ray[1].position};
 
 		auto collisions = map_.GetCollisionsForRay(ray_line);
 		/*bool found = false;

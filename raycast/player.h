@@ -3,15 +3,14 @@
 #include <vector>
 
 
-namespace map {
-	class Map;
-}
+// Forwards.
+class Map;
 
 
 class Player
 {
 public:
-	Player(int x, int y, const map::Map& map);
+	Player(int x, int y, const Map& map);
 
 	void Update(float deltatime);
 
@@ -42,6 +41,6 @@ private:
 
 	float projection_distance_;
 
-	const map::Map& map_;
+	const Map& map_;
 	sf::CircleShape texture_;
 };
