@@ -17,4 +17,6 @@ struct WallLine : Line
 };
 
 
-std::optional<sf::Vector2f> GetCollision(const Line& line1, const Line& line2);
+std::optional<sf::Vector2f> GetIntersection(const Line& line1, const Line& line2);
+
+float GetDistanceBetweenObjects(const sf::Vector2f& position1, const sf::Vector2f& position2);

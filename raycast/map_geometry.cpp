@@ -1,7 +1,7 @@
 #include "map_geometry.h"
 
 
-std::optional<sf::Vector2f> GetCollision(const Line& line1, const Line& line2)
+std::optional<sf::Vector2f> GetIntersection(const Line& line1, const Line& line2)
 {
 	float a1 = line1.p2.y - line1.p1.y;
 	float b1 = line1.p1.x - line1.p2.x;
@@ -60,4 +60,9 @@ std::optional<sf::Vector2f> GetCollision(const Line& line1, const Line& line2)
 
 		return intersection;
 	}
+}
+
+float GetDistanceBetweenObjects(const sf::Vector2f& position1, const sf::Vector2f& position2)
+{
+	return std::sqrt(std::pow(position2.x - position1.x, 2.0f) + std::pow(position2.y - position1.y, 2.0f));
 }

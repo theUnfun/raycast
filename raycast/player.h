@@ -10,37 +10,37 @@ class Map;
 class Player
 {
 public:
+
 	Player(int x, int y, const Map& map);
 
 	void Update(float deltatime);
 
-	void Draw(sf::RenderWindow& window_2d, sf::RenderWindow& window_3d);
+	void Draw(sf::RenderWindow& window_2d, sf::RenderWindow& window_3d) const;
 
 
 private:
-	float GetDistanceBetweenObjects(const sf::Vector2f& position1, const sf::Vector2f& position2);
 
 	void DrawPlayer(sf::RenderWindow& window_2d) const;
 
 	void DrawVisionRay(sf::RenderWindow& window_2d) const;
 
-	void Drawbackground(sf::RenderWindow& window_3d) const;
+	void DrawBackground(sf::RenderWindow& window_3d) const;
 
 	void ComputeDistances();
 
 	void MovePlayer(float deltatime);
 
 private:
-	sf::Vector2f position_;
-
-	float direction_ = 40.;  // angle
-	std::vector<float> distances_;
-
-	std::vector<sf::VertexArray> rays_;
-	std::vector<sf::Vector2f> collis;
-
-	float projection_distance_;
 
 	const Map& map_;
-	sf::CircleShape texture_;
+	sf::Vector2f position_;
+	float projection_distance_;
+	float direction_ = 40.;  // angle
+
+	std::vector<float> distances_;
+	std::vector<sf::VertexArray> rays_;
+	std::vector<sf::Vector2f> intersections_;
+
+
 };
+

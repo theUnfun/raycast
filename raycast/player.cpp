@@ -7,7 +7,7 @@
 
 Player::Player(int x, int y, const Map& map)
     : position_((float)x, (float)y)
-    , projection_distance_(0.5f * (float)WALL_HEIGHT / std::tan(pi / 180.0f * (0.5f * FOV_VERTICAL)))
+    , projection_distance_(0.5f * static_cast<float>(WALL_HEIGHT) / std::tan(pi / 180.0f * (0.5f * FOV_VERTICAL)))
     , map_(map)
 {
 	rays_.resize(NUMBER_OF_RAYS);
@@ -22,10 +22,10 @@ void Player::Update(float deltatime)
 }
 
 
-void Player::Draw(sf::RenderWindow& window_2d, sf::RenderWindow& window_3d)
+void Player::Draw(sf::RenderWindow& window_2d, sf::RenderWindow& window_3d) const
 {
 	DrawVisionRay(window_2d);
-	Drawbackground(window_3d);
+	DrawBackground(window_3d);
 
 
 	float i = 0;
@@ -35,27 +35,19 @@ void Player::Draw(sf::RenderWindow& window_2d, sf::RenderWindow& window_3d)
 	{
 		float projection_distance = 0.5f * WALL_HEIGHT / std::tan(pi / 180 * (0.5f * FOV_VERTICAL));
 		float height = ((float)WINDOW_HEIGHT * projection_distance / distance);
-		// float max_height = (WINDOW_HEIGHT * projection_distance / VISION_RANGE);
 
-		// unsigned char fog_brightness = static_cast<unsigned char>(255 * (1 - distance / VISION_RANGE));
-
-		/*sf::RectangleShape fog_rect(sf::Vector2f(WINDOW_WIDTH / FOV_HORIZONTAL, max_height));
-		fog_rect.setFillColor(sf::Color(100, 100, 100));
-		fog_rect.setOrigin(0, -WINDOW_HEIGHT / 2 + height / 2);
-		fog_rect.setPosition(i, 0);
-		window_3d.draw(fog_rect);*/
 		if (std::abs(distance - VISION_RANGE) > EPSILON)
 		{
 			sf::RectangleShape rect(sf::Vector2f(WINDOW_WIDTH / FOV_HORIZONTAL, height));
-			rect.setFillColor(sf::Color((uint8_t)(255.0f * (1 - distance / VISION_RANGE)),
-			                            (uint8_t)(255.0f * (1 - distance / VISION_RANGE)),
-			                            (uint8_t)(255.0f * (1 - distance / VISION_RANGE)) /*, brightness*/));
-			rect.setOrigin(0, -(float)WINDOW_HEIGHT / 2.0f + height / 2.0f);
+			rect.setFillColor(sf::Color(static_cast<uint8_t>(255.0f * (1 - distance / VISION_RANGE)),
+			                            static_cast<uint8_t>(255.0f * (1 - distance / VISION_RANGE)),
+			                            static_cast<uint8_t>(255.0f * (1 - distance / VISION_RANGE))));
+			rect.setOrigin(0, -static_cast<float>(WINDOW_HEIGHT) / 2.0f + height / 2.0f);
 			rect.setPosition(i, 0);
 			window_3d.draw(rect);
 		}
 
-		i += (float)WINDOW_WIDTH / (float)NUMBER_OF_RAYS;
+		i += static_cast<float>(WINDOW_WIDTH) / NUMBER_OF_RAYS;
 	}
 
 	for (const auto& ray : rays_)
@@ -63,7 +55,7 @@ void Player::Draw(sf::RenderWindow& window_2d, sf::RenderWindow& window_3d)
 		window_2d.draw(ray);
 	}
 
-	for (const auto& col : collis)
+	for (const auto& col : intersections_)
 	{
 		sf::CircleShape circle(3);
 		circle.setOrigin(2.5, 2.5);
@@ -73,11 +65,6 @@ void Player::Draw(sf::RenderWindow& window_2d, sf::RenderWindow& window_3d)
 	}
 
 	DrawPlayer(window_2d);
-}
-
-float Player::GetDistanceBetweenObjects(const sf::Vector2f& position1, const sf::Vector2f& position2)
-{
-	return std::sqrt(std::pow(position2.x - position1.x, 2.0f) + std::pow(position2.y - position1.y, 2.0f));
 }
 
 void Player::DrawPlayer(sf::RenderWindow& window_2d) const
@@ -99,11 +86,11 @@ void Player::DrawVisionRay(sf::RenderWindow& window_2d) const
 	window_2d.draw(vision_ray);
 }
 
-void Player::Drawbackground(sf::RenderWindow& window_3d) const
+void Player::DrawBackground(sf::RenderWindow& window_3d) const
 {
 	sf::RectangleShape ground({WINDOW_WIDTH, WINDOW_HEIGHT / 2});
 	ground.setFillColor(sf::Color(188, 93, 88));
-	ground.setPosition(0, WINDOW_HEIGHT / 2);
+	ground.setPosition(0, static_cast<float>(WINDOW_HEIGHT) / 2);
 	window_3d.draw(ground);
 	sf::RectangleShape sky({WINDOW_WIDTH, WINDOW_HEIGHT / 2});
 	sky.setFillColor(sf::Color(142, 180, 212));
@@ -115,13 +102,13 @@ void Player::ComputeDistances()
 {
 	rays_.clear();
 	distances_.clear();
-	collis.clear();
-	/*const auto bounds = map_.GetAllGlobalBounds();*/
+	intersections_.clear();
 
 	float half_far_plane_width = VISION_RANGE * std::tan((pi / 180) * FOV_HORIZONTAL / 2);
 	for (int i = 0; i < NUMBER_OF_RAYS; ++i)
 	{
-		float pixel_pos = half_far_plane_width * 2.0f * ((float)i + 0.5f - NUMBER_OF_RAYS / 2.0f) / (float)NUMBER_OF_RAYS;
+		float pixel_pos =
+		    half_far_plane_width * 2.0f * (static_cast<float>(i) + 0.5f - NUMBER_OF_RAYS / 2.0f) / NUMBER_OF_RAYS;
 
 		float angle = std::atan(pixel_pos / VISION_RANGE) * 180 / pi;
 		float max_ray_length = std::sqrt(pixel_pos * pixel_pos + VISION_RANGE * VISION_RANGE);
@@ -131,32 +118,26 @@ void Player::ComputeDistances()
 		ray[1].position = sf::Vector2f(position_.x - max_ray_length * std::cos(pi / 180.0f * (angle + direction_ + 90.0f)),
 		                               position_.y - max_ray_length * std::sin(pi / 180.0f * (angle + direction_ + 90.0f)));
 
-		Line ray_line{ray[0].position, ray[1].position};
-
-		auto collisions = map_.GetCollisionsForRay(ray_line);
-		/*bool found = false;
-		for (float ray_length = 0; ray_length < max_ray_length; ray_length += 0.5) {
-		    if (found == true) {
-		        break;
-		    }
-		    float x = position_.x - ray_length * cos(pi / 180 * (angle + direction_ + 90.));
-		    float y = position_.y - ray_length * sin(pi / 180 * (angle + direction_ + 90.));
-		    for (const auto& bound : bounds)
-		        if (bound.contains({ x,y })) {
-		            ray[1].position = sf::Vector2f(x, y);
-		            found = true;
-		            break;
-		        }
-		}*/
-		for (const auto& col : collisions)
+		/////////////
+		auto intersections = map_.GetIntersectionsForRay(Line{ray[0].position, ray[1].position});
+		intersections_.emplace_back(0.0f, 0.0f);
+		distances_.emplace_back(VISION_RANGE);
+		for (const auto& inter : intersections)
 		{
-			float distance = GetDistanceBetweenObjects(ray[0].position, col);
+			float current_depth = distances_.back();
+
+			float distance = GetDistanceBetweenObjects(ray[0].position, inter);
 			float depth = distance * cos(pi / 180 * (angle));
 
-			collis.emplace_back(col);
-			distances_.emplace_back(depth);
-			// rays_.emplace_back(std::move(ray));
+			if (current_depth > depth)
+			{
+				distances_.back() = depth;
+				intersections_.back() = inter;
+			}
 		}
+
+		///////////
+		rays_.emplace_back(std::move(ray));
 	}
 }
 
@@ -194,7 +175,6 @@ void Player::MovePlayer(float deltatime)
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 	{
 		direction_ += ROTATION_SPEED * deltatime;
-		;
 	}
 	position_ += step * deltatime;
 }

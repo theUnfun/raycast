@@ -15,7 +15,7 @@ int main()
 	Player p(50, 600, m);
 	float deltaTime = 0.f;
 
-	while (window_2d.isOpen())
+	while (window_2d.isOpen() && window_3d.isOpen())
 	{
 		sf::Event event;
 		while (window_2d.pollEvent(event))
@@ -26,11 +26,12 @@ int main()
 		deltaTime = clock.restart().asSeconds();
 
 		p.Update(deltaTime);
-		m.Update(event);
+		m.Update(event, window_2d);
 
 		window_2d.clear();
 		window_3d.clear();
-		// m.Draw2d(window_2d);
+
+		m.Draw2d(window_2d);
 		p.Draw(window_2d, window_3d);
 
 		window_2d.display();
