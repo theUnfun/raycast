@@ -8,17 +8,23 @@
 class Map
 {
 public:
+
 	void Update(const sf::Event& event, sf::RenderWindow& window_2d);
 
 	void Draw2d(sf::RenderWindow& window_2d) const;
 
-	std::vector<sf::Vector2f> GetIntersectionsForRay(const Line& ray) const;
+	const std::vector<ColoredLine>& GetLines() const;
 
 private:
-	std::vector<Line> lines_;
+
+	std::vector<ColoredLine> lines_;
+
 	bool is_drawing = false;
 	sf::Vector2f start_position_;
 	sf::Vector2f end_position_;
 
 	sf::RectangleShape temp_rectangle_;
 };
+
+
+sf::Color GetRandomColor();

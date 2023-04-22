@@ -4,23 +4,28 @@
 
 #include "constants.h"
 
-
 void Map::Update(const sf::Event& event, sf::RenderWindow& window_2d)
 {
 	if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !is_drawing)
 	{
-		start_position_ = sf::Vector2f((float)event.mouseButton.x, (float)event.mouseButton.y);
+		start_position_ = sf::Vector2f(static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y));
 		std::cout << start_position_.x << " " << start_position_.y << std::endl;
 		is_drawing = true;
 	}
 	if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && is_drawing)
 	{
-		end_position_ = sf::Vector2f((float)event.mouseButton.x, (float)event.mouseButton.y);
+		end_position_ = sf::Vector2f(static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y));
 		std::cout << end_position_.x << " " << end_position_.y << std::endl;
-		lines_.emplace_back(Line{{start_position_.x, start_position_.y}, {end_position_.x, start_position_.y}});
-		lines_.emplace_back(Line{{end_position_.x, start_position_.y}, {end_position_.x, end_position_.y}});
-		lines_.emplace_back(Line{{end_position_.x, end_position_.y}, {start_position_.x, end_position_.y}});
-		lines_.emplace_back(Line{{start_position_.x, end_position_.y}, {start_position_.x, start_position_.y}});
+
+		lines_.emplace_back(ColoredLine{sf::Vector2f(start_position_.x, start_position_.y),
+		                                sf::Vector2f(end_position_.x, start_position_.y), GetRandomColor()});
+		lines_.emplace_back(ColoredLine{sf::Vector2f(end_position_.x, start_position_.y),
+		                                sf::Vector2f(end_position_.x, end_position_.y), GetRandomColor()});
+		lines_.emplace_back(ColoredLine{sf::Vector2f(end_position_.x, end_position_.y),
+		                                sf::Vector2f(start_position_.x, end_position_.y), GetRandomColor()});
+		lines_.emplace_back(ColoredLine{sf::Vector2f(start_position_.x, end_position_.y),
+		                                sf::Vector2f(start_position_.x, start_position_.y), GetRandomColor()});
+
 		is_drawing = false;
 	}
 	else if (is_drawing)
@@ -46,18 +51,18 @@ void Map::Draw2d(sf::RenderWindow& window_2d) const
 	}
 }
 
-
-std::vector<sf::Vector2f> Map::GetIntersectionsForRay(const Line& ray) const
+const std::vector<ColoredLine>& Map::GetLines() const
 {
-	std::vector<sf::Vector2f> result;
-	for (const auto& line : lines_)
-	{
-		auto collision = GetIntersection(line, ray);
-		if (collision.has_value())
-		{
-			result.emplace_back(collision.value());
-		}
-	}
+	return lines_;
+}
 
-	return result;
+sf::Color GetRandomColor()
+{
+	std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
+	int r = std::rand() % 256;
+	int g = std::rand() % 256;
+	int b = std::rand() % 256;
+
+	return sf::Color(r, g, b);
 }

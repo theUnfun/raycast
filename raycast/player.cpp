@@ -6,12 +6,13 @@
 
 
 Player::Player(int x, int y, const Map& map)
-    : position_((float)x, (float)y)
+    : position_(static_cast<float>(x), static_cast<float> (y))
     , projection_distance_(0.5f * static_cast<float>(WALL_HEIGHT) / std::tan(pi / 180.0f * (0.5f * FOV_VERTICAL)))
     , map_(map)
 {
 	rays_.resize(NUMBER_OF_RAYS);
 	distances_.resize(NUMBER_OF_RAYS);
+	colors_.resize(NUMBER_OF_RAYS);
 }
 
 
@@ -28,26 +29,26 @@ void Player::Draw(sf::RenderWindow& window_2d, sf::RenderWindow& window_3d) cons
 	DrawBackground(window_3d);
 
 
-	float i = 0;
+	float screen_pos = 0;
 
-
-	for (const auto& distance : distances_)
+	for (size_t i = 0; i < distances_.size(); i++)
 	{
 		float projection_distance = 0.5f * WALL_HEIGHT / std::tan(pi / 180 * (0.5f * FOV_VERTICAL));
-		float height = ((float)WINDOW_HEIGHT * projection_distance / distance);
+		float height = (static_cast<float>(WINDOW_HEIGHT) * projection_distance / distances_[i]);
 
-		if (std::abs(distance - VISION_RANGE) > EPSILON)
+		if (std::abs(distances_[i] - VISION_RANGE) > EPSILON)
 		{
 			sf::RectangleShape rect(sf::Vector2f(WINDOW_WIDTH / FOV_HORIZONTAL, height));
-			rect.setFillColor(sf::Color(static_cast<uint8_t>(255.0f * (1 - distance / VISION_RANGE)),
-			                            static_cast<uint8_t>(255.0f * (1 - distance / VISION_RANGE)),
-			                            static_cast<uint8_t>(255.0f * (1 - distance / VISION_RANGE))));
+
+			rect.setFillColor(sf::Color(static_cast<uint8_t>(colors_[i].r * (1 - distances_[i] / VISION_RANGE)),
+			                           static_cast<uint8_t>( colors_[i].g * (1 - distances_[i] / VISION_RANGE)),
+			                           static_cast<uint8_t>( colors_[i].b * (1 - distances_[i] / VISION_RANGE))));
 			rect.setOrigin(0, -static_cast<float>(WINDOW_HEIGHT) / 2.0f + height / 2.0f);
-			rect.setPosition(i, 0);
+			rect.setPosition(screen_pos, 0);
 			window_3d.draw(rect);
 		}
 
-		i += static_cast<float>(WINDOW_WIDTH) / NUMBER_OF_RAYS;
+		screen_pos += static_cast<float>(WINDOW_WIDTH) / NUMBER_OF_RAYS;
 	}
 
 	for (const auto& ray : rays_)
@@ -118,25 +119,28 @@ void Player::ComputeDistances()
 		ray[1].position = sf::Vector2f(position_.x - max_ray_length * std::cos(pi / 180.0f * (angle + direction_ + 90.0f)),
 		                               position_.y - max_ray_length * std::sin(pi / 180.0f * (angle + direction_ + 90.0f)));
 
-		/////////////
-		auto intersections = map_.GetIntersectionsForRay(Line{ray[0].position, ray[1].position});
+
 		intersections_.emplace_back(0.0f, 0.0f);
 		distances_.emplace_back(VISION_RANGE);
-		for (const auto& inter : intersections)
+		for (const auto& line : map_.GetLines())
 		{
-			float current_depth = distances_.back();
-
-			float distance = GetDistanceBetweenObjects(ray[0].position, inter);
-			float depth = distance * cos(pi / 180 * (angle));
-
-			if (current_depth > depth)
+			auto collision = GetIntersection(line, Line{ray[0].position, ray[1].position});
+			if (collision.has_value())
 			{
-				distances_.back() = depth;
-				intersections_.back() = inter;
+				float current_depth = distances_.back();
+
+				float distance = GetDistanceBetweenObjects(ray[0].position, collision.value());
+				float depth = distance * cos(pi / 180 * (angle));
+
+				if (current_depth > depth)
+				{
+					distances_.back() = depth;
+					intersections_.back() = collision.value();
+					colors_[i] = line.color;
+				}
 			}
 		}
 
-		///////////
 		rays_.emplace_back(std::move(ray));
 	}
 }

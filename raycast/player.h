@@ -40,6 +40,7 @@ private:
 	std::vector<float> distances_;
 	std::vector<sf::VertexArray> rays_;
 	std::vector<sf::Vector2f> intersections_;
+	std::vector<sf::Color> colors_;
 
 
 };

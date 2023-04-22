@@ -11,11 +11,10 @@ struct Line
 	sf::Vector2f p2 = {0, 0};
 };
 
-struct WallLine : Line
+struct ColoredLine : Line
 {
 	sf::Color color = {0, 0, 0};
 };
-
 
 std::optional<sf::Vector2f> GetIntersection(const Line& line1, const Line& line2);
 

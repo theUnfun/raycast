@@ -7,7 +7,7 @@
 int main()
 {
 	sf::RenderWindow window_2d(sf::VideoMode(700, 700), "2d");
-	sf::RenderWindow window_3d(sf::VideoMode((int32_t)WINDOW_WIDTH, (int32_t)WINDOW_HEIGHT), "3d");
+	sf::RenderWindow window_3d(sf::VideoMode(static_cast<int32_t>(WINDOW_WIDTH), static_cast<int32_t>(WINDOW_HEIGHT)), "3d");
 	window_2d.setFramerateLimit(60);
 	sf::Clock clock;
 
@@ -23,6 +23,12 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window_2d.close();
 		}
+		while (window_3d.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window_3d.close();
+		}
+
 		deltaTime = clock.restart().asSeconds();
 
 		p.Update(deltaTime);

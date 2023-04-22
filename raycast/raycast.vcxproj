@@ -142,7 +142,6 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="player.h" />
     <ClCompile Include="map.h" />
-    <ClCompile Include="game.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constants.h" />
