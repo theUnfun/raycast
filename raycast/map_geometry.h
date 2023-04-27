@@ -16,6 +16,8 @@ struct ColoredLine : Line
 	sf::Color color = {0, 0, 0};
 };
 
+
+
 std::optional<sf::Vector2f> GetIntersection(const Line& line1, const Line& line2);
 
 float GetDistanceBetweenObjects(const sf::Vector2f& position1, const sf::Vector2f& position2);

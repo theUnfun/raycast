@@ -9,6 +9,8 @@ class Map
 {
 public:
 
+	Map();
+
 	void Update(const sf::Event& event, sf::RenderWindow& window_2d);
 
 	void Draw2d(sf::RenderWindow& window_2d) const;

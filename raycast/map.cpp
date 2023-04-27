@@ -4,6 +4,10 @@
 
 #include "constants.h"
 
+Map::Map() {
+	temp_rectangle_.setFillColor(sf::Color::Green);
+}
+
 void Map::Update(const sf::Event& event, sf::RenderWindow& window_2d)
 {
 	if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !is_drawing)
