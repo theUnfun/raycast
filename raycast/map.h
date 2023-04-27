@@ -17,6 +17,8 @@ public:
 
 	const std::vector<ColoredLine>& GetLines() const;
 
+	void DeleteMap();
+
 private:
 
 	std::vector<ColoredLine> lines_;

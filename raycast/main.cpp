@@ -43,18 +43,12 @@ int main()
 		ImGui::SetNextWindowPos({0, 0}, ImGuiCond_Once);
 		ImGui::Begin("Settings", nullptr,
 		             ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoMove);
-		ImGui::Text("Help");
-		ImGui::SameLine();
-		ImGui::TextDisabled("(?)");
-		if (ImGui::IsItemHovered(ImGuiHoveredFlags_DelayShort) && ImGui::BeginTooltip())
-		{
-			ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
-			ImGui::TextUnformatted("WASD to move.");
-			ImGui::TextUnformatted("<- and -> to rotate.");
-			ImGui::PopTextWrapPos();
-			ImGui::EndTooltip();
-		}
 
+		if (ImGui::CollapsingHeader("Help"))
+		{
+			ImGui::BulletText("First of all, you need to draw the walls on the map using the checkbox \"Enable drawing\"");
+			ImGui::BulletText("WASD to move. <- and -> to rotate.");
+		}
 		ImGui::SeparatorText("Drawing");
 		ImGuiIO& io = ImGui::GetIO();
 
@@ -67,6 +61,10 @@ int main()
 			ImGui::TextUnformatted("Hold down the left mouse button on 2d view to draw");
 			ImGui::PopTextWrapPos();
 			ImGui::EndTooltip();
+		}
+		if (ImGui::Button("Delete all"))
+		{
+			world.DeleteMap();
 		}
 		if (!map_is_drawing)
 		{
@@ -97,14 +95,14 @@ int main()
 				float imgui_color[3] = {color.r / 255.0f, color.g / 255.0f, color.b / 255.0f};
 				ImGui::ColorEdit3("Sky", imgui_color, ImGuiColorEditFlags_NoInputs);
 				camera.SetSkyColor((uint8_t)(imgui_color[0] * 255), (uint8_t)(imgui_color[1] * 255),
-				              (uint8_t)(imgui_color[2] * 255));
+				                   (uint8_t)(imgui_color[2] * 255));
 			}
 			{
 				auto color = camera.GetGroundColor();
 				float imgui_color[3] = {color.r / 255.0f, color.g / 255.0f, color.b / 255.0f};
 				ImGui::ColorEdit3("Ground", imgui_color, ImGuiColorEditFlags_NoInputs);
 				camera.SetGroundColor((uint8_t)(imgui_color[0] * 255), (uint8_t)(imgui_color[1] * 255),
-				              (uint8_t)(imgui_color[2] * 255));
+				                      (uint8_t)(imgui_color[2] * 255));
 			}
 		}
 

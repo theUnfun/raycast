@@ -4,7 +4,8 @@
 
 #include "constants.h"
 
-Map::Map() {
+Map::Map()
+{
 	temp_rectangle_.setFillColor(sf::Color::Green);
 }
 
@@ -58,6 +59,11 @@ void Map::Draw2d(sf::RenderWindow& window_2d) const
 const std::vector<ColoredLine>& Map::GetLines() const
 {
 	return lines_;
+}
+
+void Map::DeleteMap()
+{
+	lines_.clear();
 }
 
 sf::Color GetRandomColor()
