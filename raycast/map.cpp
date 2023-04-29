@@ -9,35 +9,71 @@ Map::Map()
 	temp_rectangle_.setFillColor(sf::Color::Green);
 }
 
-void Map::Update(const sf::Event& event, sf::RenderWindow& window_2d)
+void Map::Update(const sf::Event& event, sf::RenderWindow& window_2d, DrawMode mode)
 {
-	if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !is_drawing)
+	mode_ = mode;
+	switch (mode_)
 	{
-		start_position_ = sf::Vector2f(static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y));
-		std::cout << start_position_.x << " " << start_position_.y << std::endl;
-		is_drawing = true;
-	}
-	if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && is_drawing)
-	{
-		end_position_ = sf::Vector2f(static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y));
-		std::cout << end_position_.x << " " << end_position_.y << std::endl;
+		case DrawMode::Rectangle:
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !is_drawing)
+			{
+				start_position_ =
+				    sf::Vector2f(static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y));
+				std::cout << start_position_.x << " " << start_position_.y << std::endl;
+				is_drawing = true;
+			}
+			if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && is_drawing)
+			{
+				end_position_ =
+				    sf::Vector2f(static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y));
+				std::cout << end_position_.x << " " << end_position_.y << std::endl;
 
-		lines_.emplace_back(ColoredLine{sf::Vector2f(start_position_.x, start_position_.y),
-		                                sf::Vector2f(end_position_.x, start_position_.y), GetRandomColor()});
-		lines_.emplace_back(ColoredLine{sf::Vector2f(end_position_.x, start_position_.y),
-		                                sf::Vector2f(end_position_.x, end_position_.y), GetRandomColor()});
-		lines_.emplace_back(ColoredLine{sf::Vector2f(end_position_.x, end_position_.y),
-		                                sf::Vector2f(start_position_.x, end_position_.y), GetRandomColor()});
-		lines_.emplace_back(ColoredLine{sf::Vector2f(start_position_.x, end_position_.y),
-		                                sf::Vector2f(start_position_.x, start_position_.y), GetRandomColor()});
+				lines_.emplace_back(ColoredLine{sf::Vector2f(start_position_.x, start_position_.y),
+				                                sf::Vector2f(end_position_.x, start_position_.y), GetRandomColor()});
+				lines_.emplace_back(ColoredLine{sf::Vector2f(end_position_.x, start_position_.y),
+				                                sf::Vector2f(end_position_.x, end_position_.y), GetRandomColor()});
+				lines_.emplace_back(ColoredLine{sf::Vector2f(end_position_.x, end_position_.y),
+				                                sf::Vector2f(start_position_.x, end_position_.y), GetRandomColor()});
+				lines_.emplace_back(ColoredLine{sf::Vector2f(start_position_.x, end_position_.y),
+				                                sf::Vector2f(start_position_.x, start_position_.y), GetRandomColor()});
 
-		is_drawing = false;
-	}
-	else if (is_drawing)
-	{
-		end_position_ = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window_2d));
-		temp_rectangle_.setPosition(start_position_);
-		temp_rectangle_.setSize(end_position_ - start_position_);
+				is_drawing = false;
+			}
+			else if (is_drawing)
+			{
+				end_position_ = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window_2d));
+				temp_rectangle_.setPosition(start_position_);
+				temp_rectangle_.setSize(end_position_ - start_position_);
+			}
+			break;
+
+		case DrawMode::Line:
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && !is_drawing)
+			{
+				start_position_ =
+				    sf::Vector2f(static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y));
+				temp_line_[0].position = start_position_;
+				temp_line_[0].color = sf::Color::Green;
+				std::cout << start_position_.x << " " << start_position_.y << std::endl;
+				is_drawing = true;
+			}
+			if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && is_drawing)
+			{
+				end_position_ =
+				    sf::Vector2f(static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y));
+				std::cout << end_position_.x << " " << end_position_.y << std::endl;
+
+				lines_.emplace_back(ColoredLine{start_position_, end_position_, GetRandomColor()});
+
+				is_drawing = false;
+			}
+			else if (is_drawing)
+			{
+				end_position_ = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window_2d));
+				temp_line_[1].position = end_position_;
+				temp_line_[1].color = sf::Color::Green;
+			}
+			break;
 	}
 }
 
@@ -52,7 +88,17 @@ void Map::Draw2d(sf::RenderWindow& window_2d) const
 	}
 	if (is_drawing)
 	{
-		window_2d.draw(temp_rectangle_);
+		switch (mode_)
+		{
+			case DrawMode::Rectangle:
+				window_2d.draw(temp_rectangle_);
+				break;
+			case DrawMode::Line:
+				window_2d.draw(temp_line_);
+				break;
+		}
+
+
 	}
 }
 
