@@ -7,6 +7,21 @@
 // Forwards.
 class Map;
 
+
+struct Camera2D
+{
+	sf::Vector2f position_ = {0.0f, 0.0f};
+	float direction_deg_ = 0.0f;
+	float fov_deg_ = 80.0f;
+	float far_plane_ = 500.0f;
+
+	void Update(float deltatime);
+
+private:
+	void UpdateTransform(float deltatime);
+};
+
+
 class Camera
 {
 public:

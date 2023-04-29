@@ -5,6 +5,53 @@
 #include <cmath>
 
 
+void Camera2D::Update(float deltatime)
+{
+	UpdateTransform(deltatime);
+}
+
+
+void Camera2D::UpdateTransform(float deltatime)
+{
+	// Move.
+	{
+		float step = MOVEMENT_SPEED * deltatime;
+
+		auto Move = [](float direction_deg, float step) {
+			float direction_rad = direction_deg * (pi / 180.0f);
+
+			return sf::Vector2f{step * std::cos(direction_rad), step * std::sin(direction_rad)};
+		};
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			position_ -= Move(direction_deg_, step);
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			position_ += Move(direction_deg_, step);
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+			position_ += Move(direction_deg_ + 90.0f, step);
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+			position_ -= Move(direction_deg_ + 90.0f, step);
+	}
+
+	// Rotate.
+	{
+		float rotation_angle_deg_ = ROTATION_SPEED * deltatime;
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+		{
+			direction_deg_ -= rotation_angle_deg_;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+		{
+			direction_deg_ += rotation_angle_deg_;
+		}
+	}
+}
+
+
 Camera::Camera(int x, int y, const Map& map)
     : position_(static_cast<float>(x), static_cast<float>(y))
     , projection_distance_(0.5f * static_cast<float>(WALL_HEIGHT) / std::tan(pi / 180.0f * (0.5f * FOV_VERTICAL)))
