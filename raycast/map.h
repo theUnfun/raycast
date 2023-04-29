@@ -6,8 +6,9 @@
 
 enum class DrawMode
 {
-	Rectangle = 0,
-	Line = 1
+	NONE = 0,
+	Rectangle = 1,
+	Line = 2
 };
 
 class Map
@@ -31,7 +32,7 @@ private:
 	sf::Vector2f end_position_;
 
 
-	DrawMode mode_;
+	DrawMode mode_{0};
 	sf::RectangleShape temp_rectangle_;
 	sf::VertexArray temp_line_ {sf::Lines, 2};
 };

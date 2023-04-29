@@ -29,10 +29,11 @@ void DrawDebugUI(Map& world, Camera& camera, DrawMode& mode)
 	{
 		world.DeleteMap();
 	}
-
-	ImGui::RadioButton("Rectangle", reinterpret_cast<int*>(&mode), 0);
+	ImGui::RadioButton("None", reinterpret_cast<int*>(&mode), 0);
 	ImGui::SameLine();
-	ImGui::RadioButton("Line", reinterpret_cast<int*>(&mode), 1);
+	ImGui::RadioButton("Rectangle", reinterpret_cast<int*>(&mode), 1);
+	ImGui::SameLine();
+	ImGui::RadioButton("Line", reinterpret_cast<int*>(&mode), 2);
 	ImGui::SeparatorText("Variables");
 	{
 		int nor = camera.GetNumberOfRays();
@@ -88,7 +89,7 @@ int main()
 	Map world;
 	Camera camera(50, 600, world);
 	float deltaTime = 0.f;
-	DrawMode mode;
+	DrawMode mode{0};
 
 	while (window_2d.isOpen() && window_3d.isOpen())
 	{
