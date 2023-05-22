@@ -30,12 +30,12 @@ void Camera::Draw(sf::RenderWindow& window_2d, sf::RenderWindow& window_3d) cons
 
 
 	float screen_pos = 0;
-
 	for (size_t i = 0; i < distances_.size(); i++)
 	{
+
 		float projection_distance = 0.5f * WALL_HEIGHT / std::tan(pi / 180 * (0.5f * FOV_VERTICAL));
 		float height = (static_cast<float>(WINDOW_HEIGHT) * projection_distance / distances_[i]);
-
+		
 		if (std::abs(distances_[i] - VISION_RANGE) > EPSILON)
 		{
 			sf::RectangleShape rect(sf::Vector2f(static_cast<float>(WINDOW_WIDTH) / NUMBER_OF_RAYS, height));
@@ -47,10 +47,13 @@ void Camera::Draw(sf::RenderWindow& window_2d, sf::RenderWindow& window_3d) cons
 			rect.setPosition(screen_pos, 0);
 			window_3d.draw(rect);
 		}
+		
 
 		screen_pos += static_cast<float>(WINDOW_WIDTH) / NUMBER_OF_RAYS;
-	}
 
+
+	}
+	
 	for (const auto& ray : rays_)
 	{
 		window_2d.draw(ray);

@@ -53,6 +53,7 @@
     </ClInclude>
     <ClInclude Include="map.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="input_handler.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="imgui">
