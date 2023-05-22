@@ -6,7 +6,7 @@
 * GUI реализован с помощью ImGUI.
 
 ## Управление:
-WASD движение
-<- -> поворот
+* WASD движение
+* <- -> поворот
 
-![png](resources/screenshot.png)
+![png](raycast/resources/screenshot.png)
